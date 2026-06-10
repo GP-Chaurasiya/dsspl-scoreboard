@@ -1,0 +1,63 @@
+// Version: 4.0.0
+type DalId__808134398 = Nat;
+type List__529703492<T> =
+  {
+    var blockIndex : Nat__1040412405;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__1040412405
+  };
+type List__560604548<T> = List__529703492<T>;
+type MatchId__543136929 = Nat;
+type MatchStatus__487432672 = {#completed; #live; #scheduled};
+type Match__866392230 =
+  {
+    dalAId : Nat;
+    dalBId : Nat;
+    durationMinutes : Nat;
+    var elapsedSeconds : Nat;
+    id : Nat;
+    var isLive : Bool;
+    var scoreA : Nat;
+    var scoreB : Nat;
+    sportId : Nat;
+    var startTime : ?Int;
+    var status : {#completed; #live; #scheduled};
+    venue : Text
+  };
+type Match__986769521 =
+  {
+    dalAId : DalId__808134398;
+    dalBId : DalId__808134398;
+    durationMinutes : Nat;
+    var elapsedSeconds : Nat;
+    id : MatchId__543136929;
+    var isLive : Bool;
+    var scoreA : Nat;
+    var scoreB : Nat;
+    sportId : SportId__768938214;
+    var startTime : ?Timestamp__301639476;
+    var status : MatchStatus__487432672;
+    venue : Text
+  };
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__57003120 =
+  {
+    matches : List__560604548<Match__866392230>;
+    state : {var nextMatchId : Nat}
+  };
+type OldActor__1017015114 = {};
+type SportId__768938214 = Nat;
+type Timestamp__301639476 = Int;
+{
+  "20260609_000000_Init" : OldActor__1017015114 -> NewActor__57003120
+}
+actor  {
+  stable matches :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Match__986769521]];
+      var elementIndex : Nat__1040412405
+    };
+  stable state : {var nextMatchId : Nat}
+};
