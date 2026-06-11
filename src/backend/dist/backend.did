@@ -1,0 +1,99 @@
+type Timestamp = int;
+type SportName = text;
+type SportId = nat;
+type Sport = 
+ record {
+   id: SportId;
+   name: SportName;
+ };
+type MedalTallyEntry = 
+ record {
+   bronze: nat;
+   dalId: DalId;
+   dalName: text;
+   gold: nat;
+   silver: nat;
+   total: nat;
+ };
+type MatchStatus = 
+ variant {
+   completed;
+   live;
+   scheduled;
+ };
+type MatchPublic = 
+ record {
+   dalAId: DalId;
+   dalAName: text;
+   dalBId: DalId;
+   dalBName: text;
+   durationMinutes: nat;
+   elapsedSeconds: nat;
+   id: MatchId;
+   isLive: bool;
+   scoreA: nat;
+   scoreB: nat;
+   sportId: SportId;
+   sportName: text;
+   startTime: opt Timestamp;
+   status: MatchStatus;
+   venue: text;
+ };
+type MatchId = nat;
+type LeaderboardEntry = 
+ record {
+   dalId: DalId;
+   dalName: text;
+   draws: nat;
+   losses: nat;
+   matchesPlayed: nat;
+   points: nat;
+   winPercentage: float64;
+   wins: nat;
+ };
+type DalId = nat;
+type Dal = 
+ record {
+   id: DalId;
+   name: text;
+ };
+type CreateMatchInput = 
+ record {
+   dalAId: DalId;
+   dalBId: DalId;
+   durationMinutes: nat;
+   isLive: bool;
+   sportId: SportId;
+   venue: text;
+ };
+service : {
+  completeMatch: (matchId: MatchId) -> (bool);
+  createMatch: (input: CreateMatchInput) -> (nat);
+  decrementScoreA: (matchId: MatchId) -> (bool);
+  decrementScoreB: (matchId: MatchId) -> (bool);
+  getAllMatches: () -> (vec MatchPublic) query;
+  getDals: () -> (vec Dal) query;
+  getLeaderboard: () -> (vec LeaderboardEntry) query;
+  getLeaderboardBySport: (sportId: SportId) -> (vec LeaderboardEntry) query;
+  getLiveMatches: () -> (vec MatchPublic) query;
+  getMatch: (id: MatchId) -> (opt MatchPublic) query;
+  getMatchStats: () ->
+   (record {
+      completed: nat;
+      live: nat;
+      scheduled: nat;
+      todayCount: nat;
+      total: nat;
+    }) query;
+  getMatchesBySport: (sportId: SportId) -> (vec MatchPublic) query;
+  getMedalTally: () -> (vec MedalTallyEntry) query;
+  getRecentMatches: (limit: nat) -> (vec MatchPublic) query;
+  getSports: () -> (vec Sport) query;
+  getUpcomingMatches: (limit: nat) -> (vec MatchPublic) query;
+  incrementScoreA: (matchId: MatchId) -> (bool);
+  incrementScoreB: (matchId: MatchId) -> (bool);
+  pauseMatch: (matchId: MatchId) -> (bool);
+  resetMatch: (matchId: MatchId) -> (bool);
+  setMatchLive: (matchId: MatchId, isLive: bool) -> (bool);
+  startMatch: (matchId: MatchId) -> (bool);
+}

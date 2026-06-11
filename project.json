@@ -1,0 +1,22 @@
+{
+  "overview": "A premium light-mode sports scoreboard manager for DSSPL (Dev Sanskriti School Premier League) with 17 sports, 7 competing dals, live scoreboards, leaderboard, and medal tally.",
+  "features": [
+    "Collapsible sidebar navigation with 7 main pages and 17 sport sections",
+    "Minimal clean dashboard with quick match setup and stats",
+    "Live scoreboard with timer, score controls, and match management",
+    "Leaderboard with dal rankings and points table",
+    "Medal tally with gold/silver/bronze counts",
+    "Match schedule and reports with analytics",
+    "17 dedicated sport scoreboard pages with shared template",
+    "Premium gold and royal blue branding"
+  ],
+  "category": "sports-dashboard",
+  "tags": [
+    "sports",
+    "scoreboard",
+    "tournament",
+    "dashboard",
+    "premium"
+  ],
+  "last_updated": "2026-06-09T08:39:32.194Z"
+}
